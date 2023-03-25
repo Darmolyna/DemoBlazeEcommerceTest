@@ -10,6 +10,7 @@ Given('I open Ecommerce page', function () {
 
 When ('I click the signup button', function(){
     cy.get('#signin2').click()
+    cy.wait(2000)
 })
 When ('I enter valid signup details', function(){
      cy.get('#sign-username').type('Username' + Cypress._.random(0, 1e6))
