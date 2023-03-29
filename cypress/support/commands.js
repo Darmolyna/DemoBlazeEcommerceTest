@@ -11,6 +11,11 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('selectProduct', (totalPrice) => {
+    cy.get('#totalp').then(function (element) { 
+        var Totalamount = element.text()
+    })
+})
 //
 //
 // -- This is a child command --
