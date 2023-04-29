@@ -63,7 +63,7 @@ Feature: Ecommerce Product Deletion From Cart validation
 
 @DeletingProductsFromCartTest5
     Scenario: Deleting multiple products in cart from category and without category while logged in
-     Given I open the Ecommerce page and login
+    Given I open the Ecommerce page and login
     When I click the PHONES CATEGORY button
     Then i select a product from the list of products displayed from PHONES category
     When i click the add to cart button
