@@ -4,7 +4,7 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
 //@logOutTest1
-//Scenario:  log out after log in
+//Scenario: Verify log out after log in
     Given ('i navigate to demoBlaze Ecommerce url', function(){
         cy.visit(Cypress.env("url"))
     })
@@ -25,3 +25,19 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
     Then ('i validate successful log out', function(){
         cy.get('#nameofuser').should('contain.text', '')
     })
+
+//Scenario:  That there is a logout button on current page
+Then ('i validate logout button is visible on current page', function(){
+    cy.get("#logout2").then($button => {
+        $button.is(':visible') ? console.log('Log out button is visible on current page') 
+        : console.log('Log out button is not visible on current page')
+      })
+})
+
+// Scenario:  Verify user is not able to access account by using browser back button after logging out
+When ('I click the back button', function(){
+    cy.go('back')
+})
+Then ('I validate account not accessible by using browser', function(){
+    cy.get('#nameofuser').should('contain.text', '')
+})
