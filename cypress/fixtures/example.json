@@ -7,9 +7,14 @@
   "Password": "schoolbag",
   "Name": "Olaiya Damilola",
   "Country" : "Nigeria",
+  "InvalidEmail": "blessing.o@gz",
+  "ValidEmail": "Blessingolaiya4321@gmail.com",
+  "Message": "I am a good woman",
   "City" : "Lagos",
   "CreditCard" : 212234231345676,
   "Month" : "O6",
   "Month2": "June",
-  "Year" : "2023"
+  "Year" : "2023",
+  "LongMessage": "The cucumber plugin is one of the important plugins in cypress because it is a BDD test management"
 }
+

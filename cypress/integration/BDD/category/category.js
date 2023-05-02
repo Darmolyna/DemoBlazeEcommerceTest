@@ -13,7 +13,6 @@ Given('I open the Ecommerce page and login', function () {
      cy.get("button[onclick='logIn()']").click()
      cy.wait(2000)
 })
-
 When ('I click the PHONE CATEGORY button', function(){
     cy.get('.list-group a:nth-child(2)').click()
 })
