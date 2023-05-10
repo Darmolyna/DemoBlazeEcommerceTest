@@ -157,9 +157,9 @@ Then ('i validate confirmation message THANK YOU FOR YOUR PURCHASE! purchase', f
 })
 
 Then ('System Prompt user to login or sign up', function(){
-
+//system doesnt prompt user to loginin or signup
 })
 
 When ('validate if order ID is displayed in order confirmation', function(){
-
+    //cy.get('.lead br:nth-child(2)').to.contain('Id:')
 })

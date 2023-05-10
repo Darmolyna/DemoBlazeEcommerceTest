@@ -14,7 +14,7 @@ Scenario: validating successful purchase if all field of purchase form is filled
     Then i fill out form to Place order
     When i click the Purchase button
     Then i validate unsuccessfull purchase
-    Then i validate if the cart is empty
+    
 
 @pp2
 Scenario: Validating system prompting user to login or signup once purchase button is clicked while user is not logged in
@@ -113,15 +113,20 @@ Scenario: verify order confirmation message THANK YOU FOR YOUR PURCHASE!
 
 @pp10
 Scenario: Enter shipping information
+#System doesnt provide option to add shipping information
 
 @PP11
 Scenario: System validates correct payment information
+#System doesnt validate correct payment information
 
 @PP12
 Scenario: Validate system only accept correct month and year format
+#system does not validate if correct date and year format are entered or not
 
 @PP13
 Scenario: Check the user's email inbox for an order confirmation email.
+#System does not send order confirmation mail to user email
 
 @PP14
 Scenario: Verify that the order appears in the user's order history on the e-commerce website.
+#System doesnt provide order history
