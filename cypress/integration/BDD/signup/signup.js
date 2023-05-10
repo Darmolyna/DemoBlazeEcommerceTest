@@ -53,3 +53,13 @@ Then ('verify successfull signup', function(){
          cy.get('#sign-password').type(Cypress.env('Password'))
          cy.get('.modal-footer button[onclick="register()"]').click()
     })
+
+    Then ('I click Signup button', function(){
+        cy.get('.modal-footer button[onclick="register()"]').click()
+    })
+    Then ('i verify error message Please fill out Username and Password.', function(){
+        cy.on('window:alert', (str) => //fat pipe resolves Promise
+        {
+            expect(str).to.equal('Please fill out Username and Password.')
+        })
+    })

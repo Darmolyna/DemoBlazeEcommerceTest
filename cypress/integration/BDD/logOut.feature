@@ -11,7 +11,7 @@ Feature: Ecommerce log out functionality test
     Then i validate successful log out
 
 @logOutTest2
-    Scenario:  That there is a logout button on current page
+    Scenario:  Verify that there is a logout button on current page
     Given i navigate to demoBlaze Ecommerce url
     When i click the log in button
     Then i validate successful login

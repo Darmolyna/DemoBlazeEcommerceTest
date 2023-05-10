@@ -22,28 +22,6 @@ Then ('i select a product from the list of products displayed from PHONES catego
 When ('i click the add to cart button', function(){
     cy.get('.btn').contains('Add to cart').click()
 })
-When ('i navigate and select a product without category', function(){
-    cy.get('.active > .nav-link').click()
-    cy.wait(2000)
-    cy.get('.hrefch').contains('HTC One M9').click()
-    cy.wait(2000)
-})
-When ('i navigate to LAPTOPS category', function(){
-    cy.wait(4000)
-    cy.get('.active > .nav-link').click()
-    cy.wait(2000)
-    cy.get('.list-group a:nth-child(3)').click()
-    cy.wait(2000)
-})
-Then ('i select a product from the list of products displayed from LAPTOPS category', function(){
-    cy.get('.hrefch').contains('Sony vaio i5').click()
-})
-When ('i navigate and select another product without category', function(){
-    cy.get('.active > .nav-link').click()
-    cy.wait(2000)
-    cy.get('.hrefch').contains('Nokia lumia 1520').click()
-    cy.wait(2000)
-})
 When ('i navigate to cart', function(){
     cy.get('#cartur').click()
     cy.wait(5000)
@@ -57,7 +35,7 @@ Then ('if total price is displayed as expected', function(){
         var Result2 = result.split(':')
         var newResult = Result2[1].trim()
         cy.get('#totalp').then(function (element) { 
-            cy.expect(element.text()).to.equal(newResult)
+            expect(element.text()).to.equal(newResult)
         })
     })
 })
@@ -73,24 +51,36 @@ Then ('i fill out form to Place order', function(){
 When ('i click the Purchase button', function(){
     cy.get('.btn').contains('Purchase').click()
 })
-Then('i validate successfull purchase', function(){
-    cy.get('.sweet-alert > h2').should('contain', 'Thank you for your purchase!')
-    
+Then ('i validate unsuccessfull purchase', function(){
+    cy.on('window:alert', (str) =>
+     {
+         expect(str).to.equal('Please fill out Name and Creditcard.')
+     })
 })
-When('i validate amount, card number, name and date', function(){
-    cy.get('p br').each(($ele) => {
+
+When('validate if name, amount, card number and date displayed in order confirmation is correct as expected',
+ function(){
+    cy.on('.sweet-alert p br', (str) => //fat pipe resolves Promise
+     {
+         expect(str).to.contain('Id', 'Amount', 'Card Number', 'Name', 'Date')
+     })
+
+    cy.get('.sweet-alert p br').each(($ele) => {
+        //.lead
         cy.log($ele.text());
     });
-    /**cy.get('p br:nth-child(1)').then(function(amount){
+    
+    cy.get('.sweet-alert p br:nth-child(2)').then(function(amount){
         var result = amount.text()
         var Result2 = result.split(':')
-        var newResult = Result2[1].split('U')
-        var finalResult = newResult[0].trim()
-        cy.get('#totalp').then(function (element) { 
-            cy.expect(element.text()).to.equal(finalResult)
-        })
+        cy.log(Result2)
+        //var newResult = Result2[1].split('U')
+        //var finalResult = newResult[0].trim()
+       // cy.get('#totalp').then(function (element) { 
+           // cy.expect(element.text()).to.equal(finalResult)
+        //})
     })
-    cy.get('p br:nth-child(2)').then(function(cardN){
+    /**cy.get('p br:nth-child(2)').then(function(cardN){
         var result = cardN.text()
         var Result2 = result.split(':')
         var cardNumber = Result2[1].trim()
@@ -119,15 +109,38 @@ Then ('i validate if the cart is empty', function(){
     cy.wait(3000)
 })
 
-//@pp2
-    //Scenario: purchasing order for multiple products in cart from category and without category while not login
+When ('i navigate and select a product without category', function(){
+    cy.get('.active > .nav-link').click()
+    cy.wait(2000)
+    cy.get('.hrefch').contains('HTC One M9').click()
+    cy.wait(2000)
+})
+When ('i navigate to LAPTOPS category', function(){
+    cy.wait(4000)
+    cy.get('.active > .nav-link').click()
+    cy.wait(2000)
+    cy.get('.list-group a:nth-child(3)').click()
+    cy.wait(2000)
+})
+Then ('i select a product from the list of products displayed from LAPTOPS category', function(){
+    cy.get('.hrefch').contains('Sony vaio i5').click()
+})
+When ('i navigate and select another product without category', function(){
+    cy.get('.active > .nav-link').click()
+    cy.wait(2000)
+    cy.get('.hrefch').contains('Nokia lumia 1520').click()
+    cy.wait(2000)
+})
+Then('i validate successfull purchase', function(){
+    cy.get('.sweet-alert > h2').should('contain', 'Thank you for your purchase!')
+    
+})
+
 Given ('I open the Ecommerce page', function(){
     cy.visit(Cypress.env("url"))
     cy.wait(2000)
 })
 
-//@pp3
-    //Scenario: validating unsuccessful purchase if ~name~ and ~card number~ is ommited while logged in
 Then ('i fill out form without ~name~ and ~card number~ to Place order', function(){
     cy.wait(400)
      cy.get('#country').type(this.data.Country)
@@ -136,9 +149,17 @@ Then ('i fill out form without ~name~ and ~card number~ to Place order', functio
      cy.get('#year').type(this.data.Year)
 })
 
-Then ('i validate un successfull purchase', function(){
-    cy.on('window:alert', (str) =>
+Then ('i validate confirmation message THANK YOU FOR YOUR PURCHASE! purchase', function(){
+    cy.on('.sweet-alert', (str) =>
      {
-         expect(str).to.equal('Please fill out Name and Creditcard.')
+         expect(str).to.contain('Thank')
      })
+})
+
+Then ('System Prompt user to login or sign up', function(){
+
+})
+
+When ('validate if order ID is displayed in order confirmation', function(){
+
 })
