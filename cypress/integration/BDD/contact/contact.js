@@ -144,4 +144,9 @@ import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
         //there is bug here as app does not app sanitizes the input and prevents any harm from 
         //message contains HTML or other potentially malicious code
     })
+
+    Given ('I open the Ecommerce page', function(){
+        cy.visit(Cypress.env("url"))
+        cy.wait(2000)
+    })
     
